@@ -8,7 +8,7 @@ import 'package:flutter_todo/helper/string_helper.dart';
 import 'package:flutter_todo/models/add_and_update_todo_model.dart';
 import 'package:flutter_todo/models/get_all_todo_model.dart';
 import 'package:flutter_todo/utils/loading_indicator.dart';
-import 'package:flutter_todo/utils/snackbar.dart';
+import 'package:flutter_todo/utils/toast_message.dart';
 
 class AddAndUpdateTodoScreen extends StatefulWidget {
   final Map args;
@@ -136,7 +136,7 @@ class _AddAndUpdateTodoScreenState extends State<AddAndUpdateTodoScreen> {
                                   AddAndUpdateTodoModel(
                                 title: title.text.toString(),
                                 description: description.text.toString(),
-                                isCompleted: isDone.toString(),
+                                // isCompleted: isDone.toString(),
                               );
                               context
                                   .read<AddAndUpdateTodoCubit>()

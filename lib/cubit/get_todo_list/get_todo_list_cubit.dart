@@ -9,9 +9,11 @@ part 'get_todo_list_state.dart';
 class GetTodoListCubit extends Cubit<GetTodoListState> {
   GetTodoListCubit() : super(GetTodoListInitial());
 
-  getTodoList() async {
+  getTodoList(bool showLoading) async {
     if (await isNetworkAvailable()) {
-      emit(GetTodoListLoading());
+      if (showLoading) {
+        emit(GetTodoListLoading());
+      }
       client.getAllTodo().then((value) {
         // List<Items> all = [];
         List<Items> todo = [];

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo/cubit/get_todo_list/get_todo_list_cubit.dart';
 import 'package:flutter_todo/helper/color_helper.dart';
 import 'package:flutter_todo/helper/dimension_helper.dart';
 import 'package:flutter_todo/helper/font_helper.dart';
@@ -35,12 +37,16 @@ class Todo extends StatelessWidget {
                 const SizedBox(height: DimensionHelper.size_8),
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, RouteName.addAndUpdateTodoScreen,
+                onTap: () async {
+                  dynamic showloadaing = await Navigator.pushNamed(
+                      context, RouteName.addAndUpdateTodoScreen,
                       arguments: {
                         "type": "update",
                         "item": items[index],
                       });
+                  if (showloadaing == true) {
+                    context.read<GetTodoListCubit>().getTodoList(true);
+                  }
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(

@@ -15,10 +15,11 @@ class DeleteButton extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => DeleteTodoCubit(),
       child: BlocConsumer<DeleteTodoCubit, DeleteTodoState>(
+          // listener: (context, state) => debugPrint(state.toString()),
           listener: (context, state) {
         if (state is DeleteTodoLoaded) {
           WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            context.read<GetTodoListCubit>().getTodoList();
+            context.read<GetTodoListCubit>().getTodoList(false);
           });
         }
       }, builder: (context, state) {

@@ -20,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    context.read<GetTodoListCubit>().getTodoList();
+    context.read<GetTodoListCubit>().getTodoList(true);
     super.initState();
   }
 
@@ -83,17 +83,12 @@ class _HomeScreenState extends State<HomeScreen> {
             }),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-            dynamic isLoading = await Navigator.pushNamed(
+            dynamic ShowLoading = await Navigator.pushNamed(
                 context, RouteName.addAndUpdateTodoScreen,
                 arguments: {"type": "add"});
 
-            // print("isLoading: ${isLoading}");
-
-            if (isLoading == true) {
-              context.read<GetTodoListCubit>().getTodoList();
-
-              // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              // });
+            if (ShowLoading == true) {
+              context.read<GetTodoListCubit>().getTodoList(true);
             }
           },
           backgroundColor: ColorHelper.secondarycolor,
