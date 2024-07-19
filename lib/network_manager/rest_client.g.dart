@@ -74,11 +74,15 @@ class _RestClient implements RestClient {
   }
 
   @override
-  Future<TodoModel> updateTodo(String id) async {
+  Future<TodoModel> updateTodo(
+    String id,
+    AddAndUpdateTodoModel addAndUpdateTodoModel,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(addAndUpdateTodoModel.toJson());
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<TodoModel>(Options(
       method: 'PUT',

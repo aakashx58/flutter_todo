@@ -16,4 +16,10 @@ class StringHelper {
   static const String pleaseCheckInternet =
       'Please check your internet connection';
   static const String noTodoFound = 'No Todo Found';
+  static const String successfull = 'Successfull';
+  static const String addedSuccessfully = 'Added Successfully';
+  static const String updatedSuccessfully = 'Updated Successfully';
+  static const String deletedSuccessfully = 'Deleted Successfully';
+  static const String pleaseEnterTitle = 'Please Enter Title';
+  static const String pleaseEnterDescription = 'Please Enter Description';
 }

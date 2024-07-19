@@ -7,6 +7,7 @@ import 'package:flutter_todo/models/get_all_todo_model.dart';
 import 'package:flutter_todo/routes/route_name.dart';
 import 'package:flutter_todo/screens/delete_button.dart';
 import 'package:flutter_todo/screens/done_button.dart';
+import 'package:flutter_todo/utils/date_format.dart';
 
 class Todo extends StatelessWidget {
   final List<Items> items;
@@ -28,13 +29,18 @@ class Todo extends StatelessWidget {
           )
         : ListView.separated(
             itemCount: items.length,
+            padding:
+                const EdgeInsets.symmetric(vertical: DimensionHelper.size_12),
             separatorBuilder: (context, i) =>
                 const SizedBox(height: DimensionHelper.size_8),
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, RouteName.addAndUpdateTodoScreen,
-                      arguments: {"type": "update"});
+                      arguments: {
+                        "type": "update",
+                        "item": items[index],
+                      });
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -68,7 +74,9 @@ class Todo extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          const DeleteButton(),
+                          DeleteButton(
+                            todoId: items[index].sId ?? "",
+                          ),
                         ],
                       ),
                       Text(
@@ -83,7 +91,9 @@ class Todo extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const DoneButton(),
+                          DoneButton(
+                            items: items[index],
+                          ),
                           Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.symmetric(
@@ -99,7 +109,7 @@ class Todo extends StatelessWidget {
                                   DimensionHelper.size_50),
                             ),
                             child: Text(
-                              '18  July 2024',
+                              dateFormat(items[index].createdAt ?? ""),
                               style: TextStyle(
                                 color: ColorHelper.blackColor,
                                 fontSize: FontHelper.font_14,

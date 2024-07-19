@@ -8,7 +8,7 @@ Widget loadingIndicator() {
   return Center(
     child: SizedBox(
       height: DimensionHelper.size_20,
-      width: DimensionHelper.size_80,
+      width: DimensionHelper.size_50,
       child: LoadingIndicator(
         indicatorType: Indicator.ballBeat,
 

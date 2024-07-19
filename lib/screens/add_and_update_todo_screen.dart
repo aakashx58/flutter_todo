@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo/cubit/add_and_update_todo/cubit/add_and_update_todo_cubit.dart';
 import 'package:flutter_todo/helper/color_helper.dart';
 import 'package:flutter_todo/helper/dimension_helper.dart';
 import 'package:flutter_todo/helper/font_helper.dart';
 import 'package:flutter_todo/helper/string_helper.dart';
+import 'package:flutter_todo/models/add_and_update_todo_model.dart';
+import 'package:flutter_todo/models/get_all_todo_model.dart';
+import 'package:flutter_todo/utils/loading_indicator.dart';
+import 'package:flutter_todo/utils/snackbar.dart';
 
 class AddAndUpdateTodoScreen extends StatefulWidget {
   final Map args;
@@ -14,6 +20,7 @@ class AddAndUpdateTodoScreen extends StatefulWidget {
 
 class _AddAndUpdateTodoScreenState extends State<AddAndUpdateTodoScreen> {
   String type = "";
+  Items? item;
   bool isDone = false;
 
   TextEditingController title = TextEditingController();
@@ -22,6 +29,12 @@ class _AddAndUpdateTodoScreenState extends State<AddAndUpdateTodoScreen> {
   void initState() {
     if (widget.args.containsKey('type')) {
       type = widget.args['type'];
+    }
+
+    if (widget.args.containsKey('item')) {
+      item = widget.args['item'];
+      title.text = item?.title ?? "";
+      description.text = item?.description ?? "";
     }
     debugPrint('Print Args: ${widget.args.toString()}');
     super.initState();
@@ -102,21 +115,51 @@ class _AddAndUpdateTodoScreenState extends State<AddAndUpdateTodoScreen> {
               ],
             ),
             const SizedBox(height: DimensionHelper.size_30),
-            SizedBox(
-              height: DimensionHelper.size_45,
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorHelper.secondarycolor,
-                    foregroundColor: ColorHelper.primarycolor),
-                child: Text(
-                  type == 'add'
-                      ? StringHelper.addTodo
-                      : StringHelper.updateTodo,
-                  style: TextStyle(color: ColorHelper.primarycolor),
-                ),
-              ),
+            BlocProvider(
+              create: (BuildContext context) => AddAndUpdateTodoCubit(),
+              child: BlocConsumer<AddAndUpdateTodoCubit, AddAndUpdateTodoState>(
+                  listener: (context, state) => debugPrint(state.toString()),
+                  builder: (context, state) {
+                    return SizedBox(
+                      height: DimensionHelper.size_45,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (state is AddAndUpdateTodoLoading) {
+                          } else {
+                            if (title.text.isEmpty) {
+                              toastMessage(StringHelper.pleaseEnterTitle);
+                            } else if (description.text.isEmpty) {
+                              toastMessage(StringHelper.pleaseEnterDescription);
+                            } else {
+                              AddAndUpdateTodoModel addAndUpdateTodoModel =
+                                  AddAndUpdateTodoModel(
+                                title: title.text.toString(),
+                                description: description.text.toString(),
+                                isCompleted: isDone.toString(),
+                              );
+                              context
+                                  .read<AddAndUpdateTodoCubit>()
+                                  .addAndUpdateTodo(context, type,
+                                      addAndUpdateTodoModel, item?.sId ?? "");
+                            }
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: ColorHelper.secondarycolor,
+                            foregroundColor: ColorHelper.primarycolor),
+                        child: state is AddAndUpdateTodoLoading
+                            ? loadingIndicator()
+                            : Text(
+                                type == 'add'
+                                    ? StringHelper.addTodo
+                                    : StringHelper.updateTodo,
+                                style:
+                                    TextStyle(color: ColorHelper.primarycolor),
+                              ),
+                      ),
+                    );
+                  }),
             )
           ],
         ),

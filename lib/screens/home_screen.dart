@@ -82,9 +82,19 @@ class _HomeScreenState extends State<HomeScreen> {
               return const SizedBox();
             }),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, RouteName.addAndUpdateTodoScreen,
+          onPressed: () async {
+            dynamic isLoading = await Navigator.pushNamed(
+                context, RouteName.addAndUpdateTodoScreen,
                 arguments: {"type": "add"});
+
+            // print("isLoading: ${isLoading}");
+
+            if (isLoading == true) {
+              context.read<GetTodoListCubit>().getTodoList();
+
+              // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              // });
+            }
           },
           backgroundColor: ColorHelper.secondarycolor,
           child: Icon(

@@ -21,7 +21,8 @@ abstract class RestClient {
       @Body() AddAndUpdateTodoModel addAndUpdateTodoModel);
 
   @PUT('/v1/todos/{}id')
-  Future<TodoModel> updateTodo(@Path() String id);
+  Future<TodoModel> updateTodo(
+      @Path() String id, @Body() AddAndUpdateTodoModel addAndUpdateTodoModel);
 
   @DELETE('/v1/todos/{}id')
   Future<TodoModel> deleteTodo(@Path() String id);
