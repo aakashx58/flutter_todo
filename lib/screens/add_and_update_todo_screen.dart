@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_todo/cubit/add_and_update_todo/cubit/add_and_update_todo_cubit.dart';
+import 'package:flutter_todo/cubit/add_and_update_todo/add_and_update_todo_cubit.dart';
 import 'package:flutter_todo/helper/color_helper.dart';
 import 'package:flutter_todo/helper/dimension_helper.dart';
 import 'package:flutter_todo/helper/font_helper.dart';

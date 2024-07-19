@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_todo/cubit/delete_todo/cubit/delete_todo_cubit.dart';
+import 'package:flutter_todo/cubit/delete_todo/delete_todo_cubit.dart';
 import 'package:flutter_todo/cubit/get_todo_list/get_todo_list_cubit.dart';
 import 'package:flutter_todo/helper/color_helper.dart';
 import 'package:flutter_todo/helper/dimension_helper.dart';
