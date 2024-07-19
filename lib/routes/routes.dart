@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_todo/cubit/get_todo_list/get_todo_list_cubit.dart';
 import 'package:flutter_todo/screens/add_and_update_todo_screen.dart';
 import 'package:flutter_todo/screens/no_route_found.dart';
 import 'package:flutter_todo/routes/route_name.dart';
@@ -9,7 +11,9 @@ class Routes {
     switch (settings.name) {
       case RouteName.homeScreen:
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => BlocProvider(
+              create: (BuildContext context) => GetTodoListCubit(),
+              child: const HomeScreen()),
         );
 
       case RouteName.addAndUpdateTodoScreen:

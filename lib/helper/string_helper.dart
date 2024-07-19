@@ -13,4 +13,7 @@ class StringHelper {
   static const String done = 'Done';
   static const String addTodo = 'Add Todo';
   static const String updateTodo = 'Update Todo';
+  static const String pleaseCheckInternet =
+      'Please check your internet connection';
+  static const String noTodoFound = 'No Todo Found';
 }
