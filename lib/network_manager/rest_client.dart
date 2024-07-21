@@ -20,10 +20,10 @@ abstract class RestClient {
   Future<TodoModel> addTodo(
       @Body() AddAndUpdateTodoModel addAndUpdateTodoModel);
 
-  @PUT('/v1/todos/{}id')
+  @PUT('/v1/todos/{id}')
   Future<TodoModel> updateTodo(
       @Path() String id, @Body() AddAndUpdateTodoModel addAndUpdateTodoModel);
 
-  @DELETE('/v1/todos/{}id')
+  @DELETE('/v1/todos/{id}')
   Future<TodoModel> deleteTodo(@Path() String id);
 }

@@ -91,7 +91,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/v1/todos/{}id',
+              '/v1/todos/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -118,7 +118,7 @@ class _RestClient implements RestClient {
     )
             .compose(
               _dio.options,
-              '/v1/todos/{}id',
+              '/v1/todos/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
