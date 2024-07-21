@@ -136,7 +136,7 @@ class _AddAndUpdateTodoScreenState extends State<AddAndUpdateTodoScreen> {
                                   AddAndUpdateTodoModel(
                                 title: title.text.toString(),
                                 description: description.text.toString(),
-                                // isCompleted: isDone.toString(),
+                                isCompleted: isDone.toString(), //newmodel
                               );
                               context
                                   .read<AddAndUpdateTodoCubit>()

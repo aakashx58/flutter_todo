@@ -32,7 +32,7 @@ class DoneButton extends StatelessWidget {
                   AddAndUpdateTodoModel(
                 title: items.title,
                 description: items.description,
-                // isCompleted: true.toString(),
+                isCompleted: true.toString(), //newmodel
               );
 
               context.read<AddAndUpdateTodoCubit>().addAndUpdateTodo(
